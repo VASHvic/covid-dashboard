@@ -3,6 +3,7 @@ import './css/dashboard.css';
 // eslint-disable-next-line
 import {showElement, countDown, changeToDashboard, delay} from './logic/welcome';
 import Cookies from 'js-cookie';
+import {COOKIEDAYS, SECONDS, DELAY} from './logic/params';
 
 // DOM
 if (!window.location.href.endsWith('dashboard.html')) {
@@ -12,11 +13,11 @@ if (!window.location.href.endsWith('dashboard.html')) {
   const name = document.getElementById('name');
   // Event Listeners
   form.addEventListener('change', () => {
-    Cookies.set('name', name.value, {expires: 1});
+    Cookies.set('name', name.value, {expires: COOKIEDAYS});
     changeToDashboard();
   });
 
-  countDown(1, 500, time).then(() => {
+  countDown(SECONDS, 500, time).then(() => {
     time.remove();
     if (Cookies.get('name')) {
       // changeToDashboard();
@@ -27,6 +28,11 @@ if (!window.location.href.endsWith('dashboard.html')) {
 }
 if (window.location.href.endsWith('dashboard.html')) {
   const loading = document.getElementById('loading');
-  delay(2000).then(() => loading.remove());
-  console.log('aaa');
+  delay(DELAY).then(() => {
+    loading.remove();
+    // loadMap(vlc)
+    // createTable
+    // fetchData
+    // printData
+  });
 }
