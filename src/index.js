@@ -1,19 +1,14 @@
-const time = document.querySelector("span");
-const form = document.querySelector("form");
+import './css/welcome.css';
+import './css/dashboard.css';
+import {showElement, countDown, changeToDashboard} from './logic/welcome';
 
-count(5, 500).then(() => showLogin());
+const time = document.querySelector('h1');
+const form = document.querySelector('form');
+form.addEventListener('click', () => {
+  changeToDashboard();
+});
 
-function delay(ms) {
-  return new Promise((resolve) => setInterval(() => resolve(), ms));
-}
-
-async function count(secs, ms) {
-  for (let i = 0; i <= secs; secs--) {
-    time.innerText = secs;
-    await delay(ms);
-  }
-}
-function showLogin() {
-  time.remove();
-  form.style.display = "block";
-}
+countDown(1, 500, time).then((value) => {
+  value.remove();
+  showElement(form);
+});
