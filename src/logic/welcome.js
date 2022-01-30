@@ -17,7 +17,6 @@ async function countDown(num, ms, element) {
     printText(element, num);
     await delay(ms);
   }
-  return element;
 }
 /**
  *
@@ -39,7 +38,7 @@ function printText(element, print) {
  */
 function changeToDashboard() {
   window.location.href = '/dashboard.html';
-  window.onload = delay(2000).then(console.log('aaaaa'));
+  window.onload = delay(2000).then(() => console.log('aaaaa'));
 }
 
-export {countDown, showElement, changeToDashboard};
+export {countDown, showElement, changeToDashboard, delay};
