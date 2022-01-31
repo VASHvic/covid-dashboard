@@ -28,8 +28,10 @@ if (!window.location.href.endsWith('dashboard.html')) {
 }
 if (window.location.href.endsWith('dashboard.html')) {
   const loading = document.getElementById('loading');
+  const table = document.getElementById('table');
   delay(DELAY).then(() => {
     loading.remove();
+    showElement(table);
     // loadMap(vlc)
     // createTable
     // fetchData
