@@ -2,6 +2,17 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  /* añadir dos entrypoints
+  entry: {
+    index: './src/index.js',
+    dashboard: './src/dashboard.js'
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist'),
+  }
+  */
+
   entry: './src/index.js',
   output: {
     filename: 'index.js',
