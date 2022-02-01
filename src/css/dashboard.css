@@ -1,6 +1,4 @@
-* {
-  /* border: 1px solid black; */
-}
+@import '/src/css/welcome.css';
 header {
   background-color: antiquewhite;
   display: flex;
@@ -27,12 +25,20 @@ p#loading {
 }
 h2 {
   font-size: 26px;
-  margin: 20px 0;
+  margin-top: 2rem;
   text-align: center;
 }
 h2 small {
   font-size: 0.7em;
 }
+#searchBar {
+  width: 70%;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+/*TABLE*/
 .responsive-table li {
   border-radius: 10px;
   padding: 15px 20px;
