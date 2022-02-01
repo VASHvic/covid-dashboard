@@ -110,33 +110,33 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
+/***/ "./src/js/logic/functions.js":
+/*!***********************************!*\
+  !*** ./src/js/logic/functions.js ***!
+  \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_welcome_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/welcome.css */ \"./src/css/welcome.css\");\n/* harmony import */ var _logic_functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./logic/functions */ \"./src/logic/functions.js\");\n/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ \"./node_modules/js-cookie/dist/js.cookie.mjs\");\n/* harmony import */ var _logic_params__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./logic/params */ \"./src/logic/params.js\");\n\n // eslint-disable-line\n\n\n\n// DOM\nconsole.log('index');\nconst time = document.querySelector('h1');\nconst form = document.querySelector('form');\nconst name = document.getElementById('name');\n// Event Listeners\nform.addEventListener('change', () => {\n  js_cookie__WEBPACK_IMPORTED_MODULE_2__[\"default\"].set('name', name.value, {expires: _logic_params__WEBPACK_IMPORTED_MODULE_3__.COOKIEDAYS});\n  (0,_logic_functions__WEBPACK_IMPORTED_MODULE_1__.changeToDashboard)();\n});\n\n(0,_logic_functions__WEBPACK_IMPORTED_MODULE_1__.countDown)(_logic_params__WEBPACK_IMPORTED_MODULE_3__.SECONDS, 500, time).then(() => {\n  time.remove();\n  if (js_cookie__WEBPACK_IMPORTED_MODULE_2__[\"default\"].get('name')) {\n    // changeToDashboard();\n    console.log('alreadylogged');\n  }\n  (0,_logic_functions__WEBPACK_IMPORTED_MODULE_1__.showElement)(form);\n});\n\n\n//# sourceURL=webpack://covid-dashboard/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"countDown\": () => (/* binding */ countDown),\n/* harmony export */   \"showElement\": () => (/* binding */ showElement),\n/* harmony export */   \"changeToDashboard\": () => (/* binding */ changeToDashboard),\n/* harmony export */   \"delay\": () => (/* binding */ delay)\n/* harmony export */ });\n/**\n * @param {*} ms\n * @return {promise} after ms miliseconds\n */\nfunction delay(ms) {\n  return new Promise((resolve) => setInterval(() => resolve(), ms));\n}\n/**\n * @param {*} num to show in countdown\n * @param {*} ms  for the countdown to last\n * @param {*} element to display the num\n */\nasync function countDown(num, ms, element) {\n  for (let i = 0; i <= num; num--) {\n    printText(element, num);\n    await delay(ms);\n  }\n}\n/**\n * @param {*} element to show\n */\nfunction showElement(element) {\n  element.style.display = 'block';\n}\n/**\n * @param {*} element to print\n * @param {*} print text to print in element\n */\nfunction printText(element, print) {\n  element.innerText = print;\n}\n/**\n *changes to the dashboard page;\n */\nfunction changeToDashboard() {\n  window.location.href = '/dashboard.html';\n}\n\n\n\n\n//# sourceURL=webpack://covid-dashboard/./src/js/logic/functions.js?");
 
 /***/ }),
 
-/***/ "./src/logic/functions.js":
+/***/ "./src/js/logic/params.js":
 /*!********************************!*\
-  !*** ./src/logic/functions.js ***!
+  !*** ./src/js/logic/params.js ***!
   \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"countDown\": () => (/* binding */ countDown),\n/* harmony export */   \"showElement\": () => (/* binding */ showElement),\n/* harmony export */   \"changeToDashboard\": () => (/* binding */ changeToDashboard),\n/* harmony export */   \"delay\": () => (/* binding */ delay)\n/* harmony export */ });\n/**\n *\n * @param {*} ms\n * @return {promise} after ms miliseconds\n */\nfunction delay(ms) {\n  return new Promise((resolve) => setInterval(() => resolve(), ms));\n}\n/**\n *\n * @param {*} num to show in countdown\n * @param {*} ms  for the countdown to last\n * @param {*} element to display the num\n */\nasync function countDown(num, ms, element) {\n  for (let i = 0; i <= num; num--) {\n    printText(element, num);\n    await delay(ms);\n  }\n}\n/**\n *\n * @param {*} element to show\n */\nfunction showElement(element) {\n  element.style.display = 'block';\n}\n/**\n *\n * @param {*} element to print\n * @param {*} print text to print in element\n */\nfunction printText(element, print) {\n  element.innerText = print;\n}\n/**\n *\n */\nfunction changeToDashboard() {\n  window.location.href = '/dashboard.html';\n  window.onload = delay(2000).then(() => console.log('aaaaa'));\n}\n\n\n\n\n//# sourceURL=webpack://covid-dashboard/./src/logic/functions.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"SECONDS\": () => (/* binding */ SECONDS),\n/* harmony export */   \"COOKIEDAYS\": () => (/* binding */ COOKIEDAYS),\n/* harmony export */   \"PROVINCIAS\": () => (/* binding */ PROVINCIAS),\n/* harmony export */   \"DELAY\": () => (/* binding */ DELAY),\n/* harmony export */   \"DEFAULTMAP\": () => (/* binding */ DEFAULTMAP)\n/* harmony export */ });\nconst SECONDS = 1;\nconst COOKIEDAYS = 1;\n\nconst PROVINCIAS = ['Alicante', 'Valencia', 'Castellón'];\nconst DELAY = 1000;\nconst DEFAULTMAP = 'Valencia';\n\n\n//# sourceURL=webpack://covid-dashboard/./src/js/logic/params.js?");
 
 /***/ }),
 
-/***/ "./src/logic/params.js":
-/*!*****************************!*\
-  !*** ./src/logic/params.js ***!
-  \*****************************/
+/***/ "./src/js/ui/index.js":
+/*!****************************!*\
+  !*** ./src/js/ui/index.js ***!
+  \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"SECONDS\": () => (/* binding */ SECONDS),\n/* harmony export */   \"COOKIEDAYS\": () => (/* binding */ COOKIEDAYS),\n/* harmony export */   \"PROVINCIAS\": () => (/* binding */ PROVINCIAS),\n/* harmony export */   \"DELAY\": () => (/* binding */ DELAY),\n/* harmony export */   \"DEFAULTMAP\": () => (/* binding */ DEFAULTMAP)\n/* harmony export */ });\nconst SECONDS = 1;\nconst COOKIEDAYS = 1;\n\nconst PROVINCIAS = ['Alicante', 'Valencia', 'Castellón'];\nconst DELAY = 1000;\nconst DEFAULTMAP = 'Valencia';\n\n\n//# sourceURL=webpack://covid-dashboard/./src/logic/params.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_welcome_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../css/welcome.css */ \"./src/css/welcome.css\");\n/* harmony import */ var _logic_functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../logic/functions */ \"./src/js/logic/functions.js\");\n/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ \"./node_modules/js-cookie/dist/js.cookie.mjs\");\n/* harmony import */ var _logic_params__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../logic/params */ \"./src/js/logic/params.js\");\n\n // eslint-disable-line\n\n\n\n// DOM selections\nconst time = document.querySelector('h1');\nconst form = document.querySelector('form');\nconst name = document.getElementById('name');\n\n// Event Listeners\nform.addEventListener('submit', (e) => {\n  e.preventDefault();\n});\nform.addEventListener('change', () => {\n  js_cookie__WEBPACK_IMPORTED_MODULE_2__[\"default\"].set('name', name.value, {expires: _logic_params__WEBPACK_IMPORTED_MODULE_3__.COOKIEDAYS});\n  (0,_logic_functions__WEBPACK_IMPORTED_MODULE_1__.changeToDashboard)();\n});\n\n// main program\n(0,_logic_functions__WEBPACK_IMPORTED_MODULE_1__.countDown)(_logic_params__WEBPACK_IMPORTED_MODULE_3__.SECONDS, 500, time).then(() => {\n  time.remove();\n  if (js_cookie__WEBPACK_IMPORTED_MODULE_2__[\"default\"].get('name')) {\n    // changeToDashboard();\n    console.log('alreadylogged');\n  }\n  (0,_logic_functions__WEBPACK_IMPORTED_MODULE_1__.showElement)(form);\n});\n\n\n//# sourceURL=webpack://covid-dashboard/./src/js/ui/index.js?");
 
 /***/ }),
 
@@ -222,7 +222,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/ui/index.js");
 /******/ 	
 /******/ })()
 ;

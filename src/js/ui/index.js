@@ -1,7 +1,7 @@
-import './css/welcome.css';
-import {showElement, countDown, changeToDashboard} from './logic/functions'; // eslint-disable-line
+import '../../css/welcome.css';
+import {showElement, countDown, changeToDashboard} from '../logic/functions'; // eslint-disable-line
 import Cookies from 'js-cookie';
-import {COOKIEDAYS, SECONDS} from './logic/params';
+import {COOKIEDAYS, SECONDS} from '../logic/params';
 
 // DOM selections
 const time = document.querySelector('h1');

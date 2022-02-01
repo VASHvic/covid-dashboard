@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header id="dash-header">
+        <h1>COVID DASHBOARD</h1>
+        <div id="btn-container">
+            <a href="">All</a>
+            <a href="">Valencia</a>
+            <a href="">Alicante</a>
+            <a href="">Castellón</a>
+        </div>
+    </header>
+    <main>
+        <p id="loading">Loading...</p>
+        <div class="container" id="table" style="display: none;">
+            <h2>Latest covid data at <small>0/2/02/2022</small></h2>
+            <input type="text" id="searchBar" placeholder="Custom search..">
+            <ul class="responsive-table">
+                <li class="table-header">
+                    <div class="col col-1">City</div>
+                    <div class="col col-2">Total PCR's in 14 days</div>
+                    <div class="col col-3">PCR's x 100.000 habs</div>
+                </li>
+                <li class="table-row">
+                    <div class="col col-1" data-label="Job Id">Valencia</div>
+                    <div class="col col-2" data-label="Customer Name">500.000</div>
+                    <div class="col col-3" data-label="Amount">50</div>
+                </li>
+    </main>
+</body>
+
+</html>
