@@ -35,5 +35,17 @@ function printText(element, print) {
 function changeToDashboard() {
   window.location.href = '/dashboard.html';
 }
+/**
+ *
+ * @param {*} url
+ * @return {*} promise of the json object
+ */
+async function getDayAndCsv(url) {
+  const result = await fetch(url);
+  // console.log('result = ', result);
+  const json = await result.json();
+  // console.log('json = ', json);
+  return json;
+}
 
-export {countDown, showElement, changeToDashboard, delay};
+export {countDown, showElement, changeToDashboard, delay, getDayAndCsv};
