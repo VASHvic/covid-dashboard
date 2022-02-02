@@ -22,7 +22,7 @@ countDown(SECONDS, 500, time).then(() => {
   time.remove();
   if (Cookies.get('name')) {
     // changeToDashboard();
-    console.log('alreadylogged');
+    alert('alreadylogged');
   }
   showElement(form);
 });
