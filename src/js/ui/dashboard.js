@@ -1,11 +1,18 @@
 import '../../css/dashboard.css';
-import {displayDate, getDayAndCsv, showElement, getCsvData} from '../logic/functions'; //eslint-disable-line
+import {
+  displayDate,
+  getDayAndCsv,
+  showElement,
+  getCsvData,
+  createTableRow,
+} from '../logic/functions'; //eslint-disable-line
 import {DELAY} from '../logic/params';
 import {delay} from '../logic/functions';
 
 const loading = document.getElementById('loading');
 const table = document.getElementById('table');
 const date = document.getElementById('date');
+const ul = document.querySelector('.responsive-table');
 
 delay(DELAY).then(() => {
   loading.remove();
@@ -22,17 +29,19 @@ delay(DELAY).then(() => {
         //prettier-ignore
         .then((data) => {
           const dataArray = data.split('\n'); //pensar si obj
-          const newArray = dataArray[1].split(';');
-          console.log(newArray);
+          for (let data of dataArray) {
+            const newArray = data.split(';');
+            const newLi = createTableRow();
+            ul.appendChild(newLi);
 
-          // for (let elem of dataArray) {
-          //   console.log(elem);
-          // }
-          // console.log(dataArray);
-
-          // console.log(dataArray);
-
-          // console.log(dataArray);
+            newArray.forEach((element, index) => {
+              if (index === 1 || index === 5 || index === 6) {
+                let newDiv = document.createElement('div');
+                newDiv.innerText = element;
+                newLi.appendChild(newDiv);
+              }
+            });
+          }
         });
     }); /* eslint-enable */
 

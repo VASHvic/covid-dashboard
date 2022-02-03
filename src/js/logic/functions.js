@@ -55,6 +55,7 @@ async function getDayAndCsv(url) {
  * @param {*} elem where to display it
  */
 function displayDate(date, elem) {
+  // juntar amb printtext?
   elem.innerText = date;
 }
 /**
@@ -69,6 +70,14 @@ async function getCsvData(url) {
     console.error(error);
   }
 }
+/**
+ * @return {*} li tag with table row class
+ */
+function createTableRow() {
+  const newLi = document.createElement('li');
+  newLi.classList.add('table-row');
+  return newLi;
+}
 
 export {
   countDown,
@@ -78,4 +87,5 @@ export {
   getDayAndCsv,
   displayDate,
   getCsvData,
+  createTableRow,
 };
