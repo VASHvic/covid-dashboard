@@ -5,7 +5,8 @@ import {
   showElement,
   getCsvData,
   createTableRow,
-} from '../logic/functions'; //eslint-disable-line
+  initMap,
+} from '../logic/functions';
 import {DELAY} from '../logic/params';
 import {delay} from '../logic/functions';
 
@@ -14,9 +15,9 @@ const table = document.getElementById('table');
 const date = document.getElementById('date');
 const ul = document.querySelector('.responsive-table');
 
+showElement(table);
+initMap(39.47, -0.378);
 delay(DELAY).then(() => {
-  loading.remove();
-  showElement(table);
   /*eslint-disable */
   getDayAndCsv('https://dadesobertes.gva.es/api/3/action/package_search?q=id:5403e057-5b64-4347-ae44-06fa7a65e1b8') //prettier-ignore
     .then((json) => {
@@ -25,29 +26,30 @@ delay(DELAY).then(() => {
       const day = resources[resources.length - 1].name.slice(-10);
       displayDate(day, date);
       const csv = resources[resources.length - 1].url;
+      console.log(csv);
       getCsvData(csv)
         //prettier-ignore
         .then((data) => {
           const dataArray = data.split('\n'); //pensar si obj
+          dataArray.shift();
           for (let data of dataArray) {
             const newArray = data.split(';');
             const newLi = createTableRow();
             ul.appendChild(newLi);
-
+            //add id with codi?
             newArray.forEach((element, index) => {
-              if (index === 1 || index === 5 || index === 6) {
+              if (index === 1 || index === 4 || index === 5) {
                 let newDiv = document.createElement('div');
                 newDiv.innerText = element;
                 newLi.appendChild(newDiv);
               }
             });
+            loading.remove();
           }
         });
     }); /* eslint-enable */
 
   // loadMap(vlc)
-  // createTable
-  // printData
   // añadir catches
   // castello 12
   // alcoy 3

@@ -5,31 +5,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
     <title>Document</title>
+
+
 </head>
 
 <body>
     <header id="dash-header">
         <h1>COVID DASHBOARD</h1>
-        <div id="btn-container">
+        <nav id="btn-container">
             <a href="">All</a>
             <a href="">Valencia</a>
             <a href="">Alicante</a>
             <a href="">Castellón</a>
-        </div>
+        </nav>
     </header>
     <main>
-        <p id="loading">Loading...</p>
-        <div class="container" id="table" style="display: none;">
+        <aside id="map">
+        </aside>
+        <article class="container" id="table" style="display: none;">
             <h2>Latest covid data at <small id="date"></small></h2>
             <input type="text" id="searchBar" placeholder="Custom search..">
             <ul class="responsive-table">
                 <li class="table-header">
-                    <div class="col col-1">City</div>
-                    <div class="col col-2">Total PCR's in 14 days</div>
-                    <div class="col col-3">PCR's x 100.000 habs</div>
+                    <div class="col">City</div>
+                    <div class="col">Total PCRs + in 14 days</div>
+                    <div class="col">PCRs x 100.000 habs</div>
                 </li>
-
+                <p id="loading">Loading...</p>
+            </ul>
     </main>
 </body>
 
