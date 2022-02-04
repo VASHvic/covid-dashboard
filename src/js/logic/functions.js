@@ -103,6 +103,20 @@ function initMap(latitude, longitude) {
 
   return map;
 }
+/**
+ *
+ */
+function filterSearch() {
+  const input = document.getElementById('searchBar');
+  const cities = document.querySelectorAll('div.indice-1');
+  cities.forEach((city) => {
+    if (city.innerText.toUpperCase().includes(input.value.toUpperCase())) {
+      city.parentElement.style.display = 'flex';
+    } else {
+      city.parentElement.style.display = 'none';
+    }
+  });
+}
 
 export {
   countDown,
@@ -114,4 +128,5 @@ export {
   getCsvData,
   createTableRow,
   initMap,
+  filterSearch,
 };

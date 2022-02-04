@@ -6,6 +6,7 @@ import {
   getCsvData,
   createTableRow,
   initMap,
+  filterSearch,
 } from '../logic/functions';
 import {DELAY} from '../logic/params';
 import {delay} from '../logic/functions';
@@ -14,6 +15,8 @@ const loading = document.getElementById('loading');
 const table = document.getElementById('table');
 const date = document.getElementById('date');
 const ul = document.querySelector('.responsive-table');
+const searchbar = document.getElementById('searchBar');
+searchbar.addEventListener('keyup', filterSearch);
 
 showElement(table);
 initMap(39.47, -0.378);
@@ -40,6 +43,7 @@ delay(DELAY).then(() => {
             newArray.forEach((element, index) => {
               if (index === 1 || index === 4 || index === 5) {
                 let newDiv = document.createElement('div');
+                newDiv.classList.add(`indice-${index}`);
                 newDiv.innerText = element;
                 newLi.appendChild(newDiv);
               }
