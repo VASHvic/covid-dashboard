@@ -27,11 +27,16 @@
         </nav>
     </header>
     <main>
-        <aside id="map">
+        <aside>
+            <section id="map">
+            </section>
+            <section id="form"></section>
         </aside>
+
         <article class="container" id="table" style="display: none;">
             <h2>Latest covid data at <small id="date"></small></h2>
             <input type="text" id="searchBar" placeholder="Custom search..">
+            <button type="button" id="geoloc">Allow Geolocation</button>
             <ul class="responsive-table">
                 <li class="table-header">
                     <div class="col">City</div>

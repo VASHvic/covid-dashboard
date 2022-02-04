@@ -78,6 +78,20 @@ function createTableRow() {
   newLi.classList.add('table-row');
   return newLi;
 }
+/**
+ *
+ */
+function filterSearch() {
+  const input = document.getElementById('searchBar');
+  const cities = document.querySelectorAll('div.indice-1');
+  cities.forEach((city) => {
+    if (city.innerText.toUpperCase().includes(input.value.toUpperCase())) {
+      city.parentElement.style.display = 'flex';
+    } else {
+      city.parentElement.style.display = 'none';
+    }
+  });
+}
 // prettier-ignore
 /**
  * Creates the map
@@ -103,19 +117,37 @@ function initMap(latitude, longitude) {
 
   return map;
 }
+
+// prettier-ignore
 /**
  *
+ * @param {*} map
  */
-function filterSearch() {
-  const input = document.getElementById('searchBar');
-  const cities = document.querySelectorAll('div.indice-1');
-  cities.forEach((city) => {
-    if (city.innerText.toUpperCase().includes(input.value.toUpperCase())) {
-      city.parentElement.style.display = 'flex';
-    } else {
-      city.parentElement.style.display = 'none';
-    }
-  });
+function askLocation(map) {
+  console.log('asklocation');
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) =>{
+      console.log('pasa per la callback');
+      changePosition(map,position.coords.latitude,position.coords.longitude )});  //eslint-disable-line
+  } else {
+    alert('Geolocation not supported by the browser');
+  }
+}
+/**
+ * Position the coords in the map with a marker
+ * @param {*} map
+ * @param {*} latitude
+ * @param {*} longitude
+ * @param {*} marker
+ * @return {*} newMarker
+ */
+function changePosition(map, latitude, longitude, marker) {
+  map.setView([latitude, longitude], 13);
+  if (marker) {
+    marker.removeFrom(map);
+  }
+  const newMarker = L.marker([latitude, longitude]).addTo(map);
+  return newMarker;
 }
 
 export {
@@ -129,4 +161,5 @@ export {
   createTableRow,
   initMap,
   filterSearch,
+  askLocation,
 };

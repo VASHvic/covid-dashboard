@@ -1,5 +1,5 @@
 import '../../css/welcome.css';
-import {showElement, countDown, changeToDashboard} from '../logic/functions'; // eslint-disable-line
+import {showElement, countDown, changeToDashboard} from '../logic/functions';
 import Cookies from 'js-cookie';
 import {COOKIEDAYS, SECONDS} from '../logic/params';
 
