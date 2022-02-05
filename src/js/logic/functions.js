@@ -80,15 +80,36 @@ function createTableRow() {
 }
 /**
  *
+ * @param {*} cityNum
+ * @param {*} arr
  */
-function filterSearch() {
-  const input = document.getElementById('searchBar');
-  const cities = document.querySelectorAll('div.indice-1');
-  cities.forEach((city) => {
-    if (city.innerText.toUpperCase().includes(input.value.toUpperCase())) {
-      city.parentElement.style.display = 'flex';
+function filterByCity(cityNum, arr) {
+  if (cityNum === '*') {
+    for (const city of arr) {
+      city.style.display = 'flex';
+    }
+    return;
+  }
+  arr.forEach((element) => {
+    const code = element.getAttribute('codi');
+    if (!code.startsWith(cityNum)) {
+      element.style.display = 'none';
     } else {
-      city.parentElement.style.display = 'none';
+      element.style.display = 'flex';
+    }
+  });
+}
+/**
+ *
+ * @param {*} input
+ * @param {*} arr
+ */
+function filterSearch(input, arr) {
+  arr.forEach((elem) => {
+    if (elem.innerText.toUpperCase().includes(input.value.toUpperCase())) {
+      elem.parentElement.style.display = 'flex';
+    } else {
+      elem.parentElement.style.display = 'none';
     }
   });
 }
@@ -124,11 +145,15 @@ function initMap(latitude, longitude) {
  * @param {*} map
  */
 function askLocation(map) {
-  console.log('asklocation');
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) =>{
-      console.log('pasa per la callback');
-      changePosition(map,position.coords.latitude,position.coords.longitude )});  //eslint-disable-line
+      const {latitude, longitude} = position.coords;
+      changePosition(map, latitude, longitude );
+    },
+    ()=> {
+      printText(document.getElementById('map-msg'),
+          'User didn\'t allow for geolocation');
+    });
   } else {
     alert('Geolocation not supported by the browser');
   }
@@ -162,4 +187,5 @@ export {
   initMap,
   filterSearch,
   askLocation,
+  filterByCity,
 };

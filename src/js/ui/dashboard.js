@@ -8,6 +8,7 @@ import {
   initMap,
   filterSearch,
   askLocation,
+  filterByCity,
 } from '../logic/functions';
 import {DELAY} from '../logic/params';
 import {delay} from '../logic/functions';
@@ -19,7 +20,23 @@ const date = document.getElementById('date');
 const ul = document.querySelector('.responsive-table');
 const searchbar = document.getElementById('searchBar');
 const geoButton = document.getElementById('geoloc');
-searchbar.addEventListener('keyup', filterSearch);
+const input = document.getElementById('searchBar');
+
+const ciudades = document.querySelectorAll('a');
+// prettier-ignore
+ciudades.forEach((ciudad) =>
+  ciudad.addEventListener(
+      'click',
+      (e) =>
+        filterByCity(e.target.getAttribute('id'), document.querySelectorAll('li.table-row')) //eslint-disable-line
+  ),
+);
+
+// prettier-ignore
+searchbar.addEventListener(
+    'keyup',
+  () => filterSearch(input, document.querySelectorAll('div.indice-1')) //eslint-disable-line
+);
 // hacer promesa + quitar mapa y poner texto
 geoButton.addEventListener('click', () => askLocation(map));
 
@@ -42,14 +59,17 @@ delay(DELAY).then(() => {
             const newArray = data.split(';');
             const newLi = createTableRow();
             ul.appendChild(newLi);
-            //add id with codi?
             newArray.forEach((element, index) => {
+              if (index === 0) {
+                newLi.setAttribute('codi', element ?? 46);
+              }
               if (index === 1 || index === 4 || index === 5) {
                 let newDiv = document.createElement('div');
                 newDiv.classList.add(`indice-${index}`);
                 newDiv.innerText = element;
                 newLi.appendChild(newDiv);
               }
+              if (newLi.getAttribute('codi') === '') newLi.remove();
             });
             loading.remove();
           }
