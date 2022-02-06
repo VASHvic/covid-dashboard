@@ -21,8 +21,7 @@ form.addEventListener('change', () => {
 countDown(SECONDS, 500, time).then(() => {
   time.remove();
   if (Cookies.get('name')) {
-    // changeToDashboard();
-    alert('alreadylogged');
+    changeToDashboard();
   }
   showElement(form);
 });

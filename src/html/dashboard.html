@@ -19,25 +19,34 @@
 <body>
     <header id="dash-header">
         <h1>COVID DASHBOARD</h1>
-        <nav id="btn-container">
-            <a id="*">All</a>
-            <a id="46">Valencia</a>
-            <a id="30">Alicante</a>
-            <a id="12">Castellón</a>
-        </nav>
     </header>
     <main>
+        <h1 id="greeting"></h1>
         <aside>
             <h2 id="map-msg"></h2>
             <section id="map">
+
             </section>
-            <section id="form"></section>
+            <section id="form">
+                <label for="coment">Write a comment:</label>
+                <input type="text" placeholder="Write a title here" id="comment-title">
+                <textarea name="comment" id="comment" cols="50" rows="10"></textarea>
+                <button type="button" id="allow-notif">Allow notifications</button>
+                <button type="button" id="comment-btn">Send</button>
+            </section>
         </aside>
 
         <article class="container" id="table" style="display: none;">
             <h2>Latest covid data at <small id="date"></small></h2>
-            <input type="text" id="searchBar" placeholder="Custom search..">
-            <button type="button" id="geoloc">Allow Geolocation</button>
+            <input type="text" id="searchBar" placeholder="Search by city">
+
+            <nav id="btn-container">
+                <input type="button" id="*" value="All"></input>
+                <input type="button" id="12" value="Castellón"></input>
+                <input type="button" id="30" value="Alicante"></input>
+                <input type="button" id="46" value="Valencia"></input>
+                <button type="button" id="geoloc">Allow Geolocation</button>
+            </nav>
             <ul class="responsive-table">
                 <li class="table-header">
                     <div class="col">City</div>

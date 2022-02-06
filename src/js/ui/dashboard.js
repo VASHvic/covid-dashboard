@@ -10,10 +10,13 @@ import {
   askLocation,
   filterByCity,
 } from '../logic/functions';
+import Cookies from 'js-cookie';
 import {DELAY} from '../logic/params';
 import {delay} from '../logic/functions';
 
 const map = initMap(39.47, -0.378);
+
+// DOM selectors
 const loading = document.getElementById('loading');
 const table = document.getElementById('table');
 const date = document.getElementById('date');
@@ -21,25 +24,46 @@ const ul = document.querySelector('.responsive-table');
 const searchbar = document.getElementById('searchBar');
 const geoButton = document.getElementById('geoloc');
 const input = document.getElementById('searchBar');
+const ciudades = document.querySelectorAll('input[type="button"]');
+const greeting = document.getElementById('greeting');
+const commentTitle = document.getElementById('comment-title');
+const commentArea = document.getElementById('comment');
+const allowNotif = document.getElementById('allow-notif');
+const commentBtn = document.getElementById('comment-btn');
 
-const ciudades = document.querySelectorAll('a');
+commentBtn.addEventListener('click', () => {
+  if (Notification.permission === 'granted') {
+    console.log(`comentarea:${commentArea.value} title: ${commentTitle.value}`);
+  } else {
+    console.log('Allow notifications first');
+  }
+});
+// Event Listeners
+allowNotif.addEventListener('click', () => {
+  Notification.requestPermission().then((permission) => {
+    console.log(`Notifications : ${Notification.permission}`);
+  });
+});
 // prettier-ignore
-ciudades.forEach((ciudad) =>
+ciudades.forEach((ciudad) => // adds filter function to city buttons
   ciudad.addEventListener(
       'click',
-      (e) =>
-        filterByCity(e.target.getAttribute('id'), document.querySelectorAll('li.table-row')) //eslint-disable-line
+      (e) =>filterByCity(e.target.getAttribute('id'),
+          document.querySelectorAll('li.table-row')),
   ),
 );
 
 // prettier-ignore
-searchbar.addEventListener(
-    'keyup',
-  () => filterSearch(input, document.querySelectorAll('div.indice-1')) //eslint-disable-line
+searchbar.addEventListener( // adds filter function to search input
+    'keyup', () => filterSearch(input,
+        document.querySelectorAll('div.indice-1')),
 );
-// hacer promesa + quitar mapa y poner texto
+
 geoButton.addEventListener('click', () => askLocation(map));
 
+// main program
+const name = Cookies.get('name');
+greeting.innerHTML = `Hola ${name}`;
 showElement(table);
 delay(DELAY).then(() => {
   /*eslint-disable */
@@ -75,13 +99,4 @@ delay(DELAY).then(() => {
           }
         });
     }); /* eslint-enable */
-
-  // filtros
-  // share btn
-  // añadir catches
-  // castello 12
-  // alcoy 3
-  // valencia 12
-  // hacer response ok (pero en axios no)
-  // refactorizar y arreglar
 });

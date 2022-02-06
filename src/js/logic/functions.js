@@ -151,6 +151,7 @@ function askLocation(map) {
       changePosition(map, latitude, longitude );
     },
     ()=> {
+      document.getElementById('map').remove();
       printText(document.getElementById('map-msg'),
           'User didn\'t allow for geolocation');
     });
@@ -158,6 +159,8 @@ function askLocation(map) {
     alert('Geolocation not supported by the browser');
   }
 }
+// add reverse geocoding
+// http://nominatim.openstreetmap.org/reverse?format=xml&lat=[LATITUDE]&lon=[LONGITUDE]&zoom=18&addressdetails=1
 /**
  * Position the coords in the map with a marker
  * @param {*} map

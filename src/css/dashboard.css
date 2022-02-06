@@ -14,9 +14,6 @@ header {
   justify-content: space-around;
   align-items: center;
 }
-header #btn-container a {
-  margin-right: 0.5rem;
-}
 
 p#loading {
   align-self: center;
@@ -82,7 +79,44 @@ li div:not(.col):nth-child(3) {
 }
 
 #map {
-  height: 320px;
-  width: 460px;
+  height: 230px;
+  width: 300px;
   margin-top: 1rem;
+}
+aside {
+  display: flex;
+  gap: 3rem;
+}
+aside section#form {
+  display: flex;
+  flex-direction: column;
+}
+input[type='button'] {
+  all: unset;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+#geoloc {
+  all: unset;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+#btn-container {
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+#btn-container > * {
+  margin-right: 0.4rem;
+}
+aside {
+  height: fit-content;
 }
