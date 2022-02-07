@@ -177,6 +177,40 @@ function changePosition(map, latitude, longitude, marker) {
   const newMarker = L.marker([latitude, longitude]).addTo(map);
   return newMarker;
 }
+/**
+ *
+ * @param {*} user
+ * @param {*} title
+ * @param {*} comment
+ */
+async function sendComment(user, title, comment) {
+  // prettier-ignore
+  if (Notification.permission === 'granted' &&
+   comment.value != '' && title.value != '') {
+    // disable post button + loading text
+    const post = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+      method: 'PUT',
+      body: JSON.stringify({
+        id: 1,
+        title: title.value,
+        body: comment.value,
+        userId: user,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+    const response = await post.json();
+    new Notification(response.title, {
+      body: response.body,
+    });
+    // enable post button again + notif with response obj
+  } else {
+    console.log(
+      'Notifications must be enabled and the comment must have a title and a comment' // eslint-disable-line
+    ); // change for alert?
+  }
+}
 
 export {
   countDown,
@@ -191,4 +225,5 @@ export {
   filterSearch,
   askLocation,
   filterByCity,
+  sendComment,
 };

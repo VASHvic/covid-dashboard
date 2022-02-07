@@ -9,6 +9,7 @@ import {
   filterSearch,
   askLocation,
   filterByCity,
+  sendComment,
 } from '../logic/functions';
 import Cookies from 'js-cookie';
 import {DELAY} from '../logic/params';
@@ -31,19 +32,16 @@ const commentArea = document.getElementById('comment');
 const allowNotif = document.getElementById('allow-notif');
 const commentBtn = document.getElementById('comment-btn');
 
-commentBtn.addEventListener('click', () => {
-  if (Notification.permission === 'granted') {
-    console.log(`comentarea:${commentArea.value} title: ${commentTitle.value}`);
-  } else {
-    console.log('Allow notifications first');
-  }
-});
 // Event Listeners
-allowNotif.addEventListener('click', () => {
-  Notification.requestPermission().then((permission) => {
-    console.log(`Notifications : ${Notification.permission}`);
+commentBtn.addEventListener('click', (e) => {
+  e.target.innerText = 'Loading...';
+  e.target.disabled = true;
+  sendComment(name, commentTitle, commentArea).then(() => {
+    commentBtn.disabled = false;
+    commentBtn.innerHTML = 'Send';
   });
-});
+}); // eslint-disable-line
+allowNotif.addEventListener('click', () => Notification.requestPermission());
 // prettier-ignore
 ciudades.forEach((ciudad) => // adds filter function to city buttons
   ciudad.addEventListener(

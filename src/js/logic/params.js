@@ -1,3 +1,5 @@
+// make object instead of constants
+
 export const SECONDS = 1;
 export const COOKIEDAYS = 1;
 
