@@ -1,8 +1,8 @@
 # TODO
 
 - Objeto params
-- integrar filtros en tabla
-- comentarios
 - mirar si response.ok en json
 - refactorizar
-- comentarios
+- placeholedrs o disble button hasta poder enviar comentario!!!
+- reverse search
+- mostrar id en notif?

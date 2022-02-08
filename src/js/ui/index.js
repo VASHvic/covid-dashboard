@@ -22,6 +22,7 @@ countDown(SECONDS, 500, time).then(() => {
   time.remove();
   if (Cookies.get('name')) {
     changeToDashboard();
+  } else {
+    showElement(form);
   }
-  showElement(form);
 });

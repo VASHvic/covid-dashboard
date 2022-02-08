@@ -211,6 +211,13 @@ async function sendComment(user, title, comment) {
     ); // change for alert?
   }
 }
+/**
+ *
+ */
+function copyUrlToClipboard() {
+  navigator.clipboard.writeText(window.location.href);
+  alert(`${window.location.href} copied to clipbard`);
+}
 
 export {
   countDown,
@@ -226,4 +233,5 @@ export {
   askLocation,
   filterByCity,
   sendComment,
+  copyUrlToClipboard,
 };
