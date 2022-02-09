@@ -84,16 +84,15 @@ function createTableRow() {
  * @param {*} arr
  */
 function filterByCity(cityNum, arr) {
+  sessionStorage.setItem('filter', cityNum);
   if (cityNum === '*') {
     for (const city of arr) {
-      sessionStorage.setItem('filter', '*');
       city.style.display = 'flex';
     }
     return;
   }
   arr.forEach((element) => {
     const code = element.getAttribute('codi');
-    sessionStorage.setItem('filter', code);
     if (!code.startsWith(cityNum)) {
       element.style.display = 'none';
     } else {
@@ -226,6 +225,17 @@ function copyUrlToClipboard() {
   navigator.clipboard.writeText(window.location.href);
   alert(`${window.location.href} copied to clipbard`);
 }
+/**
+ * @param {*} arr
+ * @return {int}
+ */
+function countCities(arr) {
+  let num = 0;
+  for (const city of arr) {
+    if (city.style.display === 'flex') num++;
+  }
+  return num;
+}
 
 export {
   countDown,
@@ -242,4 +252,6 @@ export {
   filterByCity,
   sendComment,
   copyUrlToClipboard,
+  printText,
+  countCities,
 };

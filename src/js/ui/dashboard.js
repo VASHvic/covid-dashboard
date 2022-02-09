@@ -11,6 +11,8 @@ import {
   filterByCity,
   sendComment,
   copyUrlToClipboard,
+  printText,
+  countCities,
 } from '../logic/functions';
 import Cookies from 'js-cookie';
 import {DELAY} from '../logic/params';
@@ -33,6 +35,7 @@ const commentArea = document.getElementById('comment');
 const allowNotif = document.getElementById('allow-notif');
 const commentBtn = document.getElementById('comment-btn');
 const shareBtn = document.getElementById('share');
+const totalCities = document.getElementById('total-cities');
 
 // Event Listeners
 commentBtn.addEventListener('click', (e) => {
@@ -53,6 +56,12 @@ ciudades.forEach((ciudad) => // adds filter function to city buttons
     e.target.style.background = 'red';
     filterByCity(e.target.getAttribute('id'),
         document.querySelectorAll('li.table-row'));
+    printText(
+        totalCities,
+        ' Showing ' +
+            countCities(document.querySelectorAll('li.table-row')) +
+            ' cities.',
+    );
   }),
 );
 
@@ -104,9 +113,22 @@ delay(DELAY).then(() => {
               if (newLi.getAttribute('codi') === '') newLi.remove();
             });
             loading.remove();
-            filterByCity(
-              sessionStorage.getItem('filter'),
-              document.querySelectorAll('li.table-row')
+            if (sessionStorage.getItem('filter')) {
+              filterByCity(
+                sessionStorage.getItem('filter'),
+                document.querySelectorAll('li.table-row')
+              );
+              for (let ciudad of ciudades) {
+                if (ciudad.id === sessionStorage.getItem('filter')) {
+                  ciudad.style.background = 'red';
+                }
+              }
+            }
+            printText(
+              totalCities,
+              ' Showing ' +
+                countCities(document.querySelectorAll('li.table-row')) +
+                ' cities.'
             );
           }
         });
