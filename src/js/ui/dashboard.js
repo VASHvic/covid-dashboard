@@ -68,6 +68,9 @@ geoButton.addEventListener('click', () => askLocation(map));
 
 // main program
 const name = Cookies.get('name');
+if (!name) {
+  window.location.href = '/';
+}
 greeting.innerHTML = `Hola ${name}`;
 showElement(table);
 delay(DELAY).then(() => {
@@ -101,6 +104,10 @@ delay(DELAY).then(() => {
               if (newLi.getAttribute('codi') === '') newLi.remove();
             });
             loading.remove();
+            filterByCity(
+              sessionStorage.getItem('filter'),
+              document.querySelectorAll('li.table-row')
+            );
           }
         });
     }); /* eslint-enable */

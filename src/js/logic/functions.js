@@ -86,12 +86,14 @@ function createTableRow() {
 function filterByCity(cityNum, arr) {
   if (cityNum === '*') {
     for (const city of arr) {
+      sessionStorage.setItem('filter', '*');
       city.style.display = 'flex';
     }
     return;
   }
   arr.forEach((element) => {
     const code = element.getAttribute('codi');
+    sessionStorage.setItem('filter', code);
     if (!code.startsWith(cityNum)) {
       element.style.display = 'none';
     } else {
@@ -184,6 +186,7 @@ function changePosition(map, latitude, longitude, marker) {
  * @param {*} comment
  */
 async function sendComment(user, title, comment) {
+  const error = document.getElementById('form-error');
   // prettier-ignore
   if (Notification.permission === 'granted' &&
    comment.value != '' && title.value != '') {
@@ -201,15 +204,20 @@ async function sendComment(user, title, comment) {
       },
     });
     const response = await post.json();
+    console.log(response);
     new Notification(response.title, {
       body: response.body,
     });
-    // enable post button again + notif with response obj
-  } else {
-    console.log(
-      'Notifications must be enabled and the comment must have a title and a comment' // eslint-disable-line
-    ); // change for alert?
+    return;
   }
+  if (title.value === '') {
+    title.focus();
+  }
+  if (comment.value === '') {
+    comment.focus();
+  }
+  // prettier-ignore
+  printText(error, 'Fields can\'t be empty and notifications must be allowed');
 }
 /**
  *
