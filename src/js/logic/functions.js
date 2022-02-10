@@ -1,17 +1,17 @@
 import axios from 'axios';
 
 /**
- * @param {*} ms
- * @return {promise} after ms miliseconds
+ * @param {int} ms
+ * @return {promise} after miliseconds
  */
 function delay(ms) {
   return new Promise((resolve) => setInterval(() => resolve(), ms));
 }
 
 /**
- * @param {*} num to show in countdown
- * @param {*} ms  for the countdown to last
- * @param {*} element to display the num
+ * @param {int} num to show in countdown
+ * @param {int} ms for the countdown to last
+ * @param {HTML} element to display the num
  */
 async function countDown(num, ms, element) {
   for (let i = 0; i <= num; num--) {
@@ -21,25 +21,25 @@ async function countDown(num, ms, element) {
 }
 
 /**
- * @param {*} element to show
+ * @param {HTML} element to show
  */
 function showElement(element) {
   element.style.display = 'block';
 }
 
 /**
- * @param {*} element to print
- * @param {*} print text to print in element
+ * @param {HTML} element to print
+ * @param {string} print text to print in element
  */
 function printText(element, print) {
   element.innerText = print;
 }
 
 /**
- *changes to the dashboard page;
+ * @param {string} url
  */
-function changeToDashboard() {
-  window.location.href = '/dashboard.html';
+function changeURL(url) {
+  window.location.href = url;
 }
 /**
  * @param {*} url
@@ -51,16 +51,8 @@ async function getDayAndCsv(url) {
   return json;
 }
 /**
- * @param {*} date to display
- * @param {*} elem where to display it
- */
-function displayDate(date, elem) {
-  // juntar amb printtext?
-  elem.innerText = date;
-}
-/**
- *
- * @param {*} url
+ * @param {string} url to fetch
+ * @return {data}
  */
 async function getCsvData(url) {
   try {
@@ -79,9 +71,8 @@ function createTableRow() {
   return newLi;
 }
 /**
- *
- * @param {*} cityNum
- * @param {*} arr
+ * @param {*} cityNum code of the city
+ * @param {*} arr of cities (html elements)
  */
 function filterByCity(cityNum, arr) {
   sessionStorage.setItem('filter', cityNum);
@@ -101,9 +92,8 @@ function filterByCity(cityNum, arr) {
   });
 }
 /**
- *
- * @param {*} input
- * @param {*} arr
+ * @param {*} input box to search
+ * @param {*} arr of elements to filter
  */
 function filterSearch(input, arr) {
   arr.forEach((elem) => {
@@ -119,7 +109,7 @@ function filterSearch(input, arr) {
  * Creates the map
  * @param {*} latitude
  * @param {*} longitude
- * @return {*} the map
+ * @return {map} the map
  */
 function initMap(latitude, longitude) {
   const map = L.map('map').setView([latitude, longitude], 13);
@@ -142,7 +132,6 @@ function initMap(latitude, longitude) {
 
 // prettier-ignore
 /**
- *
  * @param {*} map
  */
 function askLocation(map) {
@@ -162,13 +151,14 @@ function askLocation(map) {
 }
 // add reverse geocoding
 // http://nominatim.openstreetmap.org/reverse?format=xml&lat=[LATITUDE]&lon=[LONGITUDE]&zoom=18&addressdetails=1
+
 /**
  * Position the coords in the map with a marker
  * @param {*} map
  * @param {*} latitude
  * @param {*} longitude
  * @param {*} marker
- * @return {*} newMarker
+ * @return {marker} newMarker updated
  */
 function changePosition(map, latitude, longitude, marker) {
   map.setView([latitude, longitude], 13);
@@ -179,10 +169,9 @@ function changePosition(map, latitude, longitude, marker) {
   return newMarker;
 }
 /**
- *
- * @param {*} user
- * @param {*} title
- * @param {*} comment
+ * @param {*} user stored in cookies
+ * @param {*} title of the post
+ * @param {*} comment to send
  */
 async function sendComment(user, title, comment) {
   const error = document.getElementById('form-error');
@@ -219,7 +208,7 @@ async function sendComment(user, title, comment) {
   printText(error, 'Fields can\'t be empty and notifications must be allowed');
 }
 /**
- *
+ * copies the url and shows it with an alert
  */
 function copyUrlToClipboard() {
   navigator.clipboard.writeText(window.location.href);
@@ -227,7 +216,7 @@ function copyUrlToClipboard() {
 }
 /**
  * @param {*} arr
- * @return {int}
+ * @return {int} of elements that are displayed
  */
 function countCities(arr) {
   let num = 0;
@@ -240,10 +229,9 @@ function countCities(arr) {
 export {
   countDown,
   showElement,
-  changeToDashboard,
+  changeURL,
   delay,
   getDayAndCsv,
-  displayDate,
   getCsvData,
   createTableRow,
   initMap,

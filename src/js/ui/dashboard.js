@@ -1,6 +1,5 @@
 import '../../css/dashboard.css';
 import {
-  displayDate,
   getDayAndCsv,
   showElement,
   getCsvData,
@@ -15,7 +14,7 @@ import {
   countCities,
 } from '../logic/functions';
 import Cookies from 'js-cookie';
-import {DELAY} from '../logic/params';
+import {params} from '../logic/params';
 import {delay} from '../logic/functions';
 
 const map = initMap(39.47, -0.378);
@@ -82,14 +81,15 @@ if (!name) {
 }
 greeting.innerHTML = `Hola ${name}`;
 showElement(table);
-delay(DELAY).then(() => {
+delay(params.delay).then(() => {
   /*eslint-disable */
   getDayAndCsv('https://dadesobertes.gva.es/api/3/action/package_search?q=id:5403e057-5b64-4347-ae44-06fa7a65e1b8') //prettier-ignore
     .then((json) => {
       const data = json.result.results[0];
       const resources = data.resources;
       const day = resources[resources.length - 1].name.slice(-10);
-      displayDate(day, date);
+      // displayDate(day, date);
+      printText(date, day);
       const csv = resources[resources.length - 1].url;
       getCsvData(csv)
         //prettier-ignore
@@ -124,13 +124,16 @@ delay(DELAY).then(() => {
                 }
               }
             }
-            printText(
-              totalCities,
-              ' Showing ' +
-                countCities(document.querySelectorAll('li.table-row')) +
-                ' cities.'
-            );
+
+            // printText(
+            //   totalCities,
+            //   ' Showing ' +
+            //     countCities(document.querySelectorAll('li.table-row')) +
+            //     ' cities.'
+            // );
           }
         });
     }); /* eslint-enable */
 });
+console.log(countCities(document.querySelectorAll('li.table-row')));
+// trobar com fer count
