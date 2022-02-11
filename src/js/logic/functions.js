@@ -83,7 +83,9 @@ function filterByCity(cityNum, arr) {
     return;
   }
   arr.forEach((element) => {
-    const code = element.getAttribute('codi');
+    let code = element.getAttribute('codi');
+    // to solve the problem of alicante data changing
+    if (code.startsWith('3')) code = '03';
     if (!code.startsWith(cityNum)) {
       element.style.display = 'none';
     } else {
@@ -129,14 +131,14 @@ function initMap(latitude, longitude) {
 
   return map;
 }
-
+// hacer funcion asyncrona que devuelva una promesa con las coordenadas
 // prettier-ignore
 /**
  * @param {*} map
  */
 function askLocation(map) {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) =>{
+    navigator.geolocation.getCurrentPosition( (position) =>{
       const {latitude, longitude} = position.coords;
       changePosition(map, latitude, longitude );
     },

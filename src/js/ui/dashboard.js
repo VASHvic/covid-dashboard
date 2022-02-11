@@ -17,8 +17,6 @@ import Cookies from 'js-cookie';
 import {params} from '../logic/params';
 import {delay} from '../logic/functions';
 
-const map = initMap(39.47, -0.378);
-
 // DOM selectors
 const loading = document.getElementById('loading');
 const table = document.getElementById('table');
@@ -35,7 +33,7 @@ const allowNotif = document.getElementById('allow-notif');
 const commentBtn = document.getElementById('comment-btn');
 const shareBtn = document.getElementById('share');
 const totalCities = document.getElementById('total-cities');
-
+const map = initMap(39.47, -0.378);
 // Event Listeners
 commentBtn.addEventListener('click', (e) => {
   e.target.innerText = 'Loading...';
@@ -44,18 +42,19 @@ commentBtn.addEventListener('click', (e) => {
     commentBtn.disabled = false;
     commentBtn.innerHTML = 'Send';
   });
-}); // eslint-disable-line
+});
 allowNotif.addEventListener('click', () => Notification.requestPermission());
 // prettier-ignore
 ciudades.forEach((ciudad) => // adds filter function to city buttons
   ciudad.addEventListener( 'click', (e) =>{
+    searchbar.value = '';
     for (ciudad of ciudades) { // changes  color of buttons
       ciudad.style.background= '#333';
     }
     e.target.style.background = 'red';
     filterByCity(e.target.getAttribute('id'),
         document.querySelectorAll('li.table-row'));
-    printText(
+    printText( // show the city number after filtering
         totalCities,
         ' Showing ' +
             countCities(document.querySelectorAll('li.table-row')) +
@@ -66,18 +65,22 @@ ciudades.forEach((ciudad) => // adds filter function to city buttons
 
 shareBtn.addEventListener('click', copyUrlToClipboard);
 
-// prettier-ignore
-searchbar.addEventListener( // adds filter function to search input
-    'keyup', () => filterSearch(input,
-        document.querySelectorAll('div.indice-1')),
-);
+/*eslint-disable */
+searchbar.addEventListener('keyup', () => {
+  // adds filter function to search input
+  filterSearch(input, document.querySelectorAll('div.indice-1'));
+  printText(
+    totalCities,
+    `Showing ${countCities(document.querySelectorAll('li.table-row'))} cities`
+  );
+}); /* eslint-enable */
 
 geoButton.addEventListener('click', () => askLocation(map));
 
 // main program
 const name = Cookies.get('name');
 if (!name) {
-  window.location.href = '/';
+  window.location.href = '/'; // return to login if user not registered
 }
 greeting.innerHTML = `Hola ${name}`;
 showElement(table);
@@ -88,7 +91,6 @@ delay(params.delay).then(() => {
       const data = json.result.results[0];
       const resources = data.resources;
       const day = resources[resources.length - 1].name.slice(-10);
-      // displayDate(day, date);
       printText(date, day);
       const csv = resources[resources.length - 1].url;
       getCsvData(csv)
@@ -101,10 +103,12 @@ delay(params.delay).then(() => {
             const newLi = createTableRow();
             ul.appendChild(newLi);
             newArray.forEach((element, index) => {
+              // put code of city as html attribute
               if (index === 0) {
-                newLi.setAttribute('codi', element ?? 46);
+                newLi.setAttribute('codi', element);
               }
               if (index === 1 || index === 4 || index === 5) {
+                // create a new row for the table
                 let newDiv = document.createElement('div');
                 newDiv.classList.add(`indice-${index}`);
                 newDiv.innerText = element;
@@ -114,26 +118,23 @@ delay(params.delay).then(() => {
             });
             loading.remove();
             if (sessionStorage.getItem('filter')) {
+              // check for filters in storage
               filterByCity(
                 sessionStorage.getItem('filter'),
                 document.querySelectorAll('li.table-row')
               );
               for (let ciudad of ciudades) {
+                // paint last selected filter
                 if (ciudad.id === sessionStorage.getItem('filter')) {
                   ciudad.style.background = 'red';
                 }
               }
             }
-
-            // printText(
-            //   totalCities,
-            //   ' Showing ' +
-            //     countCities(document.querySelectorAll('li.table-row')) +
-            //     ' cities.'
-            // );
           }
+          printText(
+            totalCities,
+            `Showing ${countCities(document.querySelectorAll('li.table-row'))} cities`
+          );
         });
-    }); /* eslint-enable */
+    });
 });
-console.log(countCities(document.querySelectorAll('li.table-row')));
-// trobar com fer count

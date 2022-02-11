@@ -1,9 +1,19 @@
 # TODO
 
-- Objeto params
 - mirar si response.ok en json
 - refactorizar
-- placeholedrs o disble button hasta poder enviar comentario!!!
-- reverse search
+- reverse search mapa
 - mostrar id en notif?
-- arreglar showing 0 cities
+- promesa en mapa
+- hacer que los filtros coincidan
+- mirar si procesar split en business logic
+- APuntar conceptes usats
+
+- selenium?
+- tailwind?
+
+## Antes de entregar
+
+- Llevar logs
+- Llevar prettier
+- countdown to 5
