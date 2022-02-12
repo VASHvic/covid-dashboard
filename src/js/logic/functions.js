@@ -138,9 +138,18 @@ function initMap(latitude, longitude) {
  */
 function askLocation(map) {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition( (position) =>{
+    navigator.geolocation.getCurrentPosition(async (position) =>{
       const {latitude, longitude} = position.coords;
-      changePosition(map, latitude, longitude );
+      await changePosition(map, latitude, longitude );
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${latitude}&lon=${longitude}`)
+          .then((data) => data.json())
+          .then((json) => {
+            const searchBar = document.getElementById('searchBar');
+            const keyupEvent = new Event('keyup');
+            searchBar.value = json.features[0].properties.address.city ??
+          json.features[0].properties.address.town;
+            searchBar.dispatchEvent(keyupEvent);
+          });
     },
     ()=> {
       document.getElementById('map').remove();

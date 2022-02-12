@@ -73,9 +73,9 @@ searchbar.addEventListener('keyup', () => {
     totalCities,
     `Showing ${countCities(document.querySelectorAll('li.table-row'))} cities`
   );
-}); /* eslint-enable */
+});
 
-geoButton.addEventListener('click', () => askLocation(map));
+geoButton.addEventListener('click', () => askLocation(map)); /* eslint-enable */
 
 // main program
 const name = Cookies.get('name');
@@ -129,12 +129,21 @@ delay(params.delay).then(() => {
                   ciudad.style.background = 'red';
                 }
               }
+            } else {
+              filterByCity('*', document.querySelectorAll('li.table-row'));
             }
           }
           printText(
             totalCities,
-            `Showing ${countCities(document.querySelectorAll('li.table-row'))} cities`
+            ' Showing ' +
+              countCities(document.querySelectorAll('li.table-row')) +
+              ' cities.'
           );
+          if (searchbar.value !== '') {
+            // refresh searchbar
+            const keyupEvent = new Event('keyup');
+            searchbar.dispatchEvent(keyupEvent);
+          }
         });
     });
 });
