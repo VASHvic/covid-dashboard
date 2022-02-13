@@ -36,7 +36,7 @@ const totalCities = document.getElementById('total-cities');
 const map = initMap(39.47, -0.378);
 // Event Listeners
 commentBtn.addEventListener('click', (e) => {
-  e.target.innerText = 'Loading...';
+  e.target.textContent = 'Loading...';
   e.target.disabled = true;
   sendComment(name, commentTitle, commentArea).then(() => {
     commentBtn.disabled = false;
@@ -73,6 +73,13 @@ searchbar.addEventListener('keyup', () => {
     totalCities,
     `Showing ${countCities(document.querySelectorAll('li.table-row'))} cities`
   );
+  if (ciudades[0].style.background != 'red') {
+    // show "All" button red
+    for (let ciudad of ciudades) {
+      ciudad.style.background = '#333';
+    }
+    ciudades[0].style.background = 'red';
+  }
 });
 
 geoButton.addEventListener('click', () => askLocation(map)); /* eslint-enable */
@@ -91,8 +98,8 @@ delay(params.delay).then(() => {
       const data = json.result.results[0];
       const resources = data.resources;
       const day = resources[resources.length - 1].name.slice(-10);
-      printText(date, day);
       const csv = resources[resources.length - 1].url;
+      printText(date, day);
       getCsvData(csv)
         //prettier-ignore
         .then((data) => {
@@ -111,7 +118,7 @@ delay(params.delay).then(() => {
                 // create a new row for the table
                 let newDiv = document.createElement('div');
                 newDiv.classList.add(`indice-${index}`);
-                newDiv.innerText = element;
+                newDiv.textContent = element;
                 newLi.appendChild(newDiv);
               }
               if (newLi.getAttribute('codi') === '') newLi.remove();
@@ -130,6 +137,7 @@ delay(params.delay).then(() => {
                 }
               }
             } else {
+              //if no filters saved show all
               filterByCity('*', document.querySelectorAll('li.table-row'));
             }
           }
@@ -144,6 +152,8 @@ delay(params.delay).then(() => {
             const keyupEvent = new Event('keyup');
             searchbar.dispatchEvent(keyupEvent);
           }
-        });
-    });
+        })
+        .catch((err) => alert(err));
+    })
+    .catch((err) => alert(err));
 });

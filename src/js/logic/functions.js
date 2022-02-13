@@ -146,8 +146,8 @@ function askLocation(map) {
           .then((json) => {
             const searchBar = document.getElementById('searchBar');
             const keyupEvent = new Event('keyup');
-            searchBar.value = json.features[0].properties.address.city ??
-          json.features[0].properties.address.town;
+            searchBar.value = json.features[0].properties.address.town ??
+          json.features[0].properties.address.city;
             searchBar.dispatchEvent(keyupEvent);
           });
     },
@@ -160,8 +160,6 @@ function askLocation(map) {
     alert('Geolocation not supported by the browser');
   }
 }
-// add reverse geocoding
-// http://nominatim.openstreetmap.org/reverse?format=xml&lat=[LATITUDE]&lon=[LONGITUDE]&zoom=18&addressdetails=1
 
 /**
  * Position the coords in the map with a marker
@@ -203,9 +201,8 @@ async function sendComment(user, title, comment) {
       },
     });
     const response = await post.json();
-    console.log(response);
     new Notification(response.title, {
-      body: response.body,
+      body: `Message from ${response.userId}:\n ${response.body}`,
     });
     return;
   }
