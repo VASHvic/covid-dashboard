@@ -1,0 +1,26 @@
+# Advanced JS Functionality
+
+- BS1 : js/ui/index.js line: 7
+- BS2 : js/ui/dashboard.js line: 135
+- BS4 : js/logic/funcitons.js line: 150
+- FN2 : js/logic/funcitons.js line: 7
+- FN3 : js/logic/functions.js line: 8
+- FN4 : js/ui/dashboard.js line: 38
+- PO2 : js/logic/functions.js line: 144
+- AR2 : js/ui/dashboard.js line: 108
+- AR5 : js/logic/functions.js line: 142
+- SH1 : js/logic/functions.js line: 8
+- DO1 : js/ui/index.js line: 7
+- DO4 : js/ui/dashboard.js line: 39
+- DO5 : js/ui/dashboard.js line: 52
+- EV1 : js/ui/dashboard.js line: 54
+- EV3 : js/ui/index.js line: 13
+- EV4 : js/ui/index.js line: 15
+- EH5 : js/ui/dashboard.js line: 158
+- SD1 : js/ui/index.js line: 16
+- SD2 : js/ui/dashboard.js line: 127
+- PR1 : js/logic/functions.js line: 8
+- PR2 : js/logic/functions.js line: 141 to 145
+- AJ1 : js/logic/functions.js line: 191
+- GL1 : js/logic/functions.js line: 139
+- FN1 : js/logic/functions.js line: 204

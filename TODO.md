@@ -4,8 +4,6 @@
 - refactorizar
 - promesa en mapa
 - mirar si procesar split en business logic
-- APuntar conceptes usats
-- mirar si msg roig desapareix
 
 ## Antes de entregar
 

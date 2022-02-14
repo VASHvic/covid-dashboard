@@ -204,6 +204,7 @@ async function sendComment(user, title, comment) {
     new Notification(response.title, {
       body: `Message from ${response.userId}:\n ${response.body}`,
     });
+    error.textContent= '';
     return;
   }
   if (title.value === '') {
