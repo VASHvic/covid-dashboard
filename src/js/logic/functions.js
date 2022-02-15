@@ -131,7 +131,6 @@ function initMap(latitude, longitude) {
 
   return map;
 }
-// hacer funcion asyncrona que devuelva una promesa con las coordenadas
 // prettier-ignore
 /**
  * @param {*} map
@@ -142,7 +141,7 @@ function askLocation(map) {
       const {latitude, longitude} = position.coords;
       await changePosition(map, latitude, longitude );
       fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${latitude}&lon=${longitude}`)
-          .then((data) => data.json())
+          .then((data) => data.json()) // reverse search coordenates find town
           .then((json) => {
             const searchBar = document.getElementById('searchBar');
             const keyupEvent = new Event('keyup');
