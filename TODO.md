@@ -4,7 +4,6 @@
 - refactorizar
 - promesa en mapa
 - mirar si procesar split en business logic
-- valencia mapa constants
 
 ## Antes de entregar
 

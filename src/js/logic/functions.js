@@ -106,7 +106,6 @@ function filterSearch(input, arr) {
     }
   });
 }
-// prettier-ignore
 /**
  * Creates the map
  * @param {*} latitude
@@ -131,41 +130,57 @@ function initMap(latitude, longitude) {
 
   return map;
 }
-// prettier-ignore
+
 /**
- * @param {*} map
+ * @return {Promise}
  */
-function askLocation(map) {
+function getPosition() {
+  return new Promise((resolve, reject) =>
+    navigator.geolocation.getCurrentPosition(resolve, reject));
+}
+/**
+ * @param {Map} map
+ * @return {position} if geolocation is posible
+ */
+async function askLocation(map) {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(async (position) =>{
+    try {
+      const position = await getPosition();
       const {latitude, longitude} = position.coords;
-      await changePosition(map, latitude, longitude );
-      fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${latitude}&lon=${longitude}`)
-          .then((data) => data.json()) // reverse search coordenates find town
-          .then((json) => {
-            const searchBar = document.getElementById('searchBar');
-            const keyupEvent = new Event('keyup');
-            searchBar.value = json.features[0].properties.address.town ??
-          json.features[0].properties.address.city;
-            searchBar.dispatchEvent(keyupEvent);
-          });
-    },
-    ()=> {
+      changePosition(map, latitude, longitude);
+      return position.coords;
+    } catch {
       document.getElementById('map').remove();
       printText(document.getElementById('map-msg'),
-          'User didn\'t allow for geolocation');
-    });
+          'User didn\'t allow for geolocation',
+      );
+    };
   } else {
-    alert('Geolocation not supported by the browser');
+    throw new Error('Geolocation not supported by the browser');
   }
 }
 
 /**
+ * @param {float} lat
+ * @param {float} long
+ */
+async function reverseSearchMap(lat, long) {
+  const data = await fetch(`https://nominatim.openstreetmap.org/reverse?format=geojson&lat=${lat}&lon=${long}`);
+  const json = await data.json();
+  const searchBar = document.getElementById('searchBar');
+  const keyupEvent = new Event('keyup');
+  searchBar.value =
+    json.features[0].properties.address.town ??
+    json.features[0].properties.address.city;
+  searchBar.dispatchEvent(keyupEvent);
+}
+
+/**
  * Position the coords in the map with a marker
- * @param {*} map
- * @param {*} latitude
- * @param {*} longitude
- * @param {*} marker
+ * @param {Map} map
+ * @param {float} latitude
+ * @param {float} longitude
+ * @param {Marker} marker
  * @return {marker} newMarker updated
  */
 function changePosition(map, latitude, longitude, marker) {
@@ -183,7 +198,6 @@ function changePosition(map, latitude, longitude, marker) {
  */
 async function sendComment(user, title, comment) {
   const error = document.getElementById('form-error');
-  // prettier-ignore
   if (Notification.permission === 'granted' &&
    comment.value != '' && title.value != '') {
     // disable post button + loading text
@@ -212,7 +226,6 @@ async function sendComment(user, title, comment) {
   if (comment.value === '') {
     comment.focus();
   }
-  // prettier-ignore
   printText(error, 'Fields can\'t be empty and notifications must be allowed');
 }
 /**
@@ -250,4 +263,5 @@ export {
   copyUrlToClipboard,
   printText,
   countCities,
+  reverseSearchMap,
 };
