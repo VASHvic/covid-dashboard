@@ -39,7 +39,12 @@ function printText(element, print) {
  * @param {string} url
  */
 function changeURL(url) {
-  window.location.href = url;
+  if (window.location.href.endsWith('index.html')) {
+    window.location.href =
+     window.location.href.replace('index.html', 'dashboard.html');
+  } else {
+    window.location.href += url;
+  }
 }
 /**
  * @param {*} url

@@ -21,7 +21,7 @@ form.addEventListener('change', () => {
 countDown(params.seconds, 500, time).then(() => {
   time.remove();
   if (Cookies.get('name')) {
-    changeURL('/dashboard.html');
+    changeURL('dashboard.html');
   } else {
     showElement(form);
   }

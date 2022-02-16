@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <title>Document</title>
+
+
+<script defer src="dashboard.js"></script></head>
+
+<body>
+    <header id="dash-header">
+        <h1>COVID DASHBOARD</h1>
+        <h1 id="greeting"></h1>
+        <button id="share">Share</button>
+    </header>
+
+    <main>
+        <aside>
+            <h2 id="map-msg"></h2>
+            <section id="map">
+            </section>
+            <section id="form">
+                <label for="coment">Write a comment:</label>
+                <input type="text" id="comment-title">
+                <textarea name="comment" id="comment" cols="50" rows="10"></textarea>
+                <button type="button" id="allow-notif">Allow notifications</button>
+                <button type="button" id="comment-btn">Send</button>
+                <p id="form-error"><small></small></p>
+            </section>
+        </aside>
+
+        <article class="container" id="table" style="display: none;">
+            <h2>Latest covid data at <small id="date"></small></h2>
+            <input type="text" id="searchBar" placeholder="Search by city"><span id="total-cities"></span>
+
+            <nav id="btn-container">
+                <input type="button" id="*" value="All"></input>
+                <input type="button" id="12" value="Castellón"></input>
+                <input type="button" id="03" value="Alicante"></input>
+                <input type="button" id="46" value="Valencia"></input>
+                <button type="button" id="geoloc">Allow Geolocation</button>
+            </nav>
+            <ul class="responsive-table">
+                <li class="table-header">
+                    <div class="col">City</div>
+                    <div class="col">Total PCRs + in 14 days</div>
+                    <div class="col">PCRs x 100.000 habs</div>
+                </li>
+                <p id="loading">Loading...</p>
+            </ul>
+    </main>
+</body>
+
+</html>
