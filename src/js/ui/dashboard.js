@@ -34,6 +34,8 @@ const allowNotif = document.getElementById('allow-notif');
 const commentBtn = document.getElementById('comment-btn');
 const shareBtn = document.getElementById('share');
 const totalCities = document.getElementById('total-cities');
+
+// Iniciar mapa
 const map = initMap(params.valencia.latitude, params.valencia.longitude);
 // Event Listeners
 commentBtn.addEventListener('click', (e) => {
